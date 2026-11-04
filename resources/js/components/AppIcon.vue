@@ -1,0 +1,7 @@
+<script setup lang="ts">
+import type { Component } from 'vue';
+import { GraduationCap, LayoutDashboard, Users, School, CalendarDays, BookOpen, LibraryBig, Clock3, UsersRound, Trophy, MessagesSquare, Wallet, CreditCard, Receipt, ChartNoAxesCombined, Bus, ContactRound, Megaphone, Settings, Building2, Layers, ChevronDown, ChevronRight, ArrowUpRight, ArrowDownLeft, Search, Bell, Menu, X, Sun, Moon, ArrowRight, ShieldCheck, CircleHelp, Mail, MoreHorizontal, Check, Plus, Filter, MapPin, Info } from '@lucide/vue';
+withDefaults(defineProps<{ name: string; size?: number }>(), { size: 18 });
+const icons: Record<string, Component> = { brand: GraduationCap, dashboard: LayoutDashboard, students: Users, classes: School, calendar: CalendarDays, academics: BookOpen, subjects: LibraryBig, clock: Clock3, parents: UsersRound, sports: Trophy, messages: MessagesSquare, wallet: Wallet, fees: CreditCard, receipt: Receipt, finance: ChartNoAxesCombined, bus: Bus, staff: ContactRound, marketing: Megaphone, settings: Settings, school: Building2, platform: Layers, plans: Layers, down: ChevronDown, right: ChevronRight, up: ArrowUpRight, incoming: ArrowDownLeft, search: Search, bell: Bell, menu: Menu, close: X, sun: Sun, moon: Moon, arrow: ArrowRight, shield: ShieldCheck, help: CircleHelp, mail: Mail, more: MoreHorizontal, check: Check, plus: Plus, filter: Filter, pin: MapPin, info: Info };
+</script>
+<template><component :is="icons[name] ?? BookOpen" :data-icon="name" :size="size" :stroke-width="1.8" aria-hidden="true"/></template>

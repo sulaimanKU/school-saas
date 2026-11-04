@@ -1,0 +1,7 @@
+<script setup lang="ts">
+import { computed } from 'vue';
+import DashboardCard from './DashboardCard.vue';
+const props = defineProps<{ classes: {name:string;boys:number;girls:number;students:number}[]; live?:boolean }>();
+const ceiling = computed(()=>Math.max(4, Math.ceil(Math.max(...props.classes.map(c=>c.students),0)/4)*4));
+</script>
+<template><DashboardCard title="Class-wise students" :subtitle="live?'Active enrollments in the selected session':'Class groups aggregated by grade'" :sample="!live"><template #action><span class="chart-key"><i/>Boys <i/>Girls <template v-if="classes.some(c=>c.students>c.boys+c.girls)"><i class="other-key"/>Other</template></span></template><div class="bar-chart" role="img" :aria-label="classes.map(c=>`${c.name}: ${c.students} students`).join(', ')"><div class="bar-axis"><span v-for="n in [4,3,2,1,0]" :key="n">{{ Math.round(ceiling*n/4) }}</span></div><div class="bars"><div v-for="c in classes" :key="c.name" class="bar-column"><div class="bar-track"><div class="bar-stack" :style="{height: (c.students/ceiling*100)+'%'}" :title="`${c.name}: ${c.boys} boys, ${c.girls} girls`"><span class="bar-girls" :style="{height:(c.girls/Math.max(c.students,1)*100)+'%'}"/><span class="bar-boys" :style="{height:(c.boys/Math.max(c.students,1)*100)+'%'}"/><span class="bar-other" :style="{height:((c.students-c.boys-c.girls)/Math.max(c.students,1)*100)+'%'}"/></div></div><span>{{ c.name.replace('Grade ','G') }}</span></div></div></div></DashboardCard></template>
